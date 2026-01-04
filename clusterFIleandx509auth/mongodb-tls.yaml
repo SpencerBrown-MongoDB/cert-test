@@ -1,0 +1,57 @@
+# Defaults for subject name components.
+subject:
+  O: MongoDB
+  CN: TestX509
+
+# Create keyfiles; keyfiles are files with 32 random bytes stored in base64 format (44 bytes total)
+keyfiles:
+  keyfile:
+
+# Create certificates and keys
+certificates:
+  root-ca1:
+    type: rootCA
+    rsabits: 4096
+    valid: 7300
+    subject:
+      O: MongoDB
+      OU: Root-CA1
+      CN: TestX509
+  root-ca2:
+    type: rootCA
+    rsabits: 4096
+    valid: 7300
+    subject:
+      O: MongoDB
+      OU: Root-CA2
+      CN: TestX509
+  server:
+    type: server
+    issuer: root-ca1
+    subject:
+      OU: Server-CA1
+    hosts:
+      - mongodb-local.computer
+  internalclient:
+    type: client
+    issuer: root-ca2
+    subject:
+      OU: Server-CA1
+  client:
+    type: client
+    issuer: root-ca2
+    subject:
+      OU: Client
+
+# Create combined files
+combos:
+  server-key-cert:
+    - server.key
+    - server.pem
+  internalclient-key-cert:
+    - internalclient.key
+    - internalclient.pem
+  client-key-cert:
+    - client.key
+    - client.pem
+  

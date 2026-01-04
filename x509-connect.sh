@@ -1,0 +1,1 @@
+mongosh --host testx509/mongodb-local.computer --tls --tlsCAFile tls/root-ca1.pem  --tlsCertificateKeyFile tls/private/client-key-cert.pem --authenticationMechanism MONGODB-X509 --authenticationDatabase '$external'
