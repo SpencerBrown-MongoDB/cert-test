@@ -1,0 +1,41 @@
+processManagement:
+  fork: true
+
+storage:
+  dbPath: data/--NODE--
+  engine: wiredTiger
+  wiredTiger:
+    engineConfig:
+      cacheSizeGB: 0.5
+
+systemLog:
+  destination: file
+  path: data/--NODE--.log
+  verbosity: 0
+
+net:
+  port: --PORT--
+  bindIp: 0.0.0.0
+  unixDomainSocket:
+    enabled: false
+  tls:
+    mode: preferTLS
+    certificateKeyFile: tls/private/server-key-cert.pem
+    CAFile: tls/root-ca1.pem
+    clusterFile: tls/private/internalclient-key-cert.pem
+    clusterCAFile: tls/root-ca2.pem
+    clusterAuthX509:
+      attributes: "CN=*.mongodb-local.computer"
+    allowConnectionsWithoutCertificates: true
+
+security:
+  authorization: enabled
+  # keyFile: tls/private/keyfile.key
+  clusterAuthMode: x509
+
+setParameter:
+  authenticationMechanisms: SCRAM-SHA-1,SCRAM-SHA-256,MONGODB-X509
+  # tlsWithholdClientCertificate: true
+
+replication:
+  replSetName: testx509

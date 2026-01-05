@@ -1,0 +1,50 @@
+# Create certificates and keys
+certificates:
+  root-ca1:
+    type: rootCA
+    rsabits: 4096
+    valid: 7300
+    subject:
+      O: MongoDB
+      OU: Root-CA1
+      CN: TestX509
+  root-ca2:
+    type: rootCA
+    rsabits: 4096
+    valid: 7300
+    subject:
+      O: MongoDB
+      OU: Root-CA2
+      CN: TestX509
+  server:
+    type: server
+    issuer: root-ca1
+    subject:
+      CN: "*.mongodb-local.computer"
+    hosts:
+      - mongodb-local.computer
+  internalclient:
+    type: client
+    issuer: root-ca2
+    subject:
+      CN: "*.mongodb-local.computer"
+  client:
+    type: client
+    issuer: root-ca2
+    subject:
+      O: MongoDB  
+      OU: Client
+      CN: TestX509 
+
+# Create combined files
+combos:
+  server-key-cert:
+    - server.key
+    - server.pem
+  internalclient-key-cert:
+    - internalclient.key
+    - internalclient.pem
+  client-key-cert:
+    - client.key
+    - client.pem
+  
