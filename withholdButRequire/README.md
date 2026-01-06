@@ -1,0 +1,3 @@
+This is exactly like "likeAtlas" but the server TLS certificate does *not* have client auth. The tests run exactly like "likeAtlas" showing that removing client auth from public CA server certificates will not affect Atlas, because the certificateKeyFile is not used as a client certificate.
+
+**however**, in this test we proved that it is required to set net.tls.allowConnectionsWithoutCertificates to true when you set the server parameter tlsWithholdClientCertificates, otherwise you get intrasluster connection failures.
