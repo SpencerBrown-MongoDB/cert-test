@@ -24,6 +24,6 @@ external TLS will be like:
 # implications on X509 authentication
 
 * The cluster can authenticate with cluster auth x509
-  * this is managed by matching O/OU/DC in the client certificate's DN signed by CA2 to the O/OU/DC in the server certificate's DN signed by CA1. (!)
+  * this is managed by matching attributes in the client certificate's DN signed by CA2 to the attributes in the server certificate's DN signed by CA1. (!)
 * for example, a GTS server cert and also an LE server cert have this DN: `CN=*.hpo5vl.mongodb.net` in [this cluster](https://cloud.mongodb.com/v2/682fb4ab1660942ff0d83a2c#/clusters/detail/golden-data-set).
 * so, to implement x509 internal auth in Atlas, we would have to use our own managed CA for CA2, because we cannot allow a customer to create a client certificate that could match the CN of our server certificate and give it full internal auth. 

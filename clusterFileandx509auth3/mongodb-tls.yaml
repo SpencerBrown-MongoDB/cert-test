@@ -20,6 +20,8 @@ certificates:
     type: server
     issuer: root-ca1
     subject:
+      O: MongoDB  
+      OU: InternalClient
       CN: "*.mongodb-local.computer"
     hosts:
       - mongodb-local.computer
